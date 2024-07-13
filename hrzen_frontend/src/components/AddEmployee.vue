@@ -77,7 +77,7 @@ export default {
     },
     // saveEmployee() {
     //   const toast = useToast();
-    //   axios.post('https://hr-system-wcp8.onrender.com/api/employees', this.localEmployee)
+    //   axios.post('http://127.0.0.1:5000/api/employees', this.localEmployee)
     //     .then(() => {
     //       this.$emit('employee-added');
     //       this.closeDialog();
@@ -91,7 +91,7 @@ export default {
   saveEmployee() {
   const toast = useToast();
   const token = localStorage.getItem('token');
-  axios.post('https://hr-system-wcp8.onrender.com/api/employees', this.localEmployee, {
+  axios.post('http://127.0.0.1:5000/api/employees', this.localEmployee, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

@@ -24,13 +24,16 @@
             Events on {{ selectedDate.toDateString() }}
           </v-card-title>
           <v-card-text>
-            <div v-for="event in filteredEvents" :key="event.id" class="mb-2">
-              <div>{{ event.title }}</div>
-              <div>{{ event.date }}</div>
-              <v-icon small class="mr-2" @click="showEditEventDialog(event)">mdi-pencil</v-icon>
+            <div v-for="event in filteredEvents" :key="event.id" class="d-flex justify-space-between mt-6">
+             <div >
+               <span>{{ event.title }} {{ event.date }}</span>
+             </div>
+             <div>
+              <!-- <v-icon small class="mr-2" @click="showEditEventDialog(event)">mdi-pencil</v-icon> -->
               <v-icon small color="red" @click="confirmDelete(event.id)">mdi-delete</v-icon>
-              <v-divider class="my-2"></v-divider>
+             </div>
             </div>
+            <v-divider class="my-2 mt-2"></v-divider>
           </v-card-text>
         </v-card>
       </v-col>
@@ -78,7 +81,7 @@ export default {
 
     // const fetchEvents = async () => {
     //   try {
-    //     const response = await axios.get('https://hr-system-wcp8.onrender.com/api/events');
+    //     const response = await axios.get('http://127.0.0.1:5000/api/events');
     //     events.value = response.data;
     //   } catch (error) {
     //     toast.error('Failed to fetch events');
@@ -88,7 +91,7 @@ export default {
     const fetchEvents = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('https://hr-system-wcp8.onrender.com/api/events', {
+        const response = await axios.get('http://127.0.0.1:5000/api/events', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -116,7 +119,7 @@ export default {
     const deleteEvent = async () => {
       const token = localStorage.getItem('token');
       try {
-        await axios.delete(`https://hr-system-wcp8.onrender.com/api/events/${eventIdToDelete.value}`, {
+        await axios.delete(`http://127.0.0.1:5000/api/events/${eventIdToDelete.value}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -131,7 +134,7 @@ export default {
 
     // const deleteEvent = async () => {
     //   try {
-    //     await axios.delete(`https://hr-system-wcp8.onrender.com/api/events/${eventIdToDelete.value}`);
+    //     await axios.delete(`http://127.0.0.1:5000/api/events/${eventIdToDelete.value}`);
     //     toast.success('Event deleted successfully');
     //     fetchEvents();
     //     closeDeleteDialog();

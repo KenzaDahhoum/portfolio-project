@@ -25,9 +25,10 @@ def token_required(f):
         if not token:
             return jsonify({'message': 'Token is missing!'}), 403
         try:
-            token = token.split()[1]  
+            token = token.split()[1].replace('\'','')[1:]
+            data = jwt.decode(token, app.config['JWT_SECRET_KEY'],algorithm='HS256')
+            print(token)
             print(f"Token received: {token}")
-            data = jwt.decode(token, app.config['JWT_SECRET_KEY'] )
             print(f"Decoded token data: {data}")
             current_user = Employee.query.filter_by(id=data['id']).first()
             if not current_user:
@@ -92,13 +93,13 @@ def login():
 
     user = Employee.query.filter_by(email=data['email']).first()
     if user and check_password_hash(user.password, data['password']):
-        token = jwt.encode({'id': user.id, 'exp': datetime.utcnow() + timedelta(hours=24)}, app.config['JWT_SECRET_KEY'])
+        token = jwt.encode({'id': user.id, 'exp': datetime.utcnow() + timedelta(hours=24)}, app.config['JWT_SECRET_KEY'],algorithm='HS256',)
         print(f"Token generated: {token}")
         return jsonify({'token': str(token), 'role': user.role}), 200
     return jsonify({'message': 'Invalid credentials'}), 401
 
 @app.route('/change-password', methods=['POST'])
-def change_password():
+def change_password(): 
     data = request.json
     try:
         user_id = jwt.decode(data['token'].split()[1], app.config['JWT_SECRET_KEY'] )['id']

@@ -27,7 +27,7 @@
       async changePassword() {
         try {
           const token = localStorage.getItem('token');
-          await axios.post('https://hr-system-wcp8.onrender.com/change-password', {
+          await axios.post('http://127.0.0.1:5000/change-password', {
             token: token,
             newPassword: this.newPassword,
           });

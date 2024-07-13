@@ -33,7 +33,7 @@ export default {
   methods: {
     register() {
       const toast = useToast();
-      axios.post('https://hr-system-wcp8.onrender.com/register', {
+      axios.post('http://127.0.0.1:5000/register', {
         name: this.name,
         email: this.email,
         role: this.role,

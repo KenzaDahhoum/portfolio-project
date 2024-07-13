@@ -41,7 +41,7 @@ export default {
   methods: {
     fetchAttendanceRecords() {
       const token = localStorage.getItem('token');
-      axios.get(`https://hr-system-wcp8.onrender.com/api/attendance?employee_id=${this.employeeId}`, {
+      axios.get(`http://127.0.0.1:5000/api/attendance?employee_id=${this.employeeId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -59,7 +59,7 @@ export default {
       const status = 'Present';
       const token = localStorage.getItem('token');
 
-      axios.post('https://hr-system-wcp8.onrender.com/api/attendance', { employee_id: this.employeeId, date, status }, {
+      axios.post('http://127.0.0.1:5000/api/attendance', { employee_id: this.employeeId, date, status }, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
