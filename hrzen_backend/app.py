@@ -27,7 +27,7 @@ def token_required(f):
         try:
             token = token.split()[1]  
             print(f"Token received: {token}")
-            data = jwt.decode(token, app.config['JWT_SECRET_KEY'], algorithms=["HS256"])
+            data = jwt.decode(token, app.config['JWT_SECRET_KEY'] )
             print(f"Decoded token data: {data}")
             current_user = Employee.query.filter_by(id=data['id']).first()
             if not current_user:
@@ -101,7 +101,7 @@ def login():
 def change_password():
     data = request.json
     try:
-        user_id = jwt.decode(data['token'].split()[1], app.config['JWT_SECRET_KEY'], algorithms=["HS256"])['id']
+        user_id = jwt.decode(data['token'].split()[1], app.config['JWT_SECRET_KEY'] )['id']
         user = Employee.query.get(user_id)
         if user and check_password_hash(user.password, data['current_password']):
             user.password = generate_password_hash(data['new_password'], method='sha256')
