@@ -197,7 +197,8 @@ def get_events(current_user):
 def add_event(current_user):
     data = request.json
     try:
-        date = datetime.strptime(data['date'], '%Y-%m-%dT%H:%M:%S.%fZ').date()
+        date = datetime.strptime(data['date'], '%Y-%m-%dT%H:%M:%S.%fZ').date() + timedelta(days=1)
+        print(date)
     except ValueError:
         return jsonify({'message': 'Invalid date format'}), 400
     new_event = Event(title=data['title'], date=date)
