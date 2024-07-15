@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app color="primary" dark>
-    <v-btn icon @click="$emit('toggle-drawer')" v-if="isLoggedIn">
+    <v-btn icon @click="$emit('toggle-drawer')">
       <v-icon>mdi-menu</v-icon>
     </v-btn>
     <v-toolbar-title>HRZen</v-toolbar-title>
@@ -17,6 +17,11 @@
 <script>
 export default {
   name: 'AppNavbar',
+  data() {
+    return {
+      search: ''
+    };
+  },
   computed: {
     isLoggedIn() {
       return !!localStorage.getItem('token');
@@ -41,7 +46,6 @@ export default {
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
-      this.$emit('logout'); // Emit a custom event to handle additional logout actions
       this.$router.push({ name: 'HomePage' });
     }
   }
