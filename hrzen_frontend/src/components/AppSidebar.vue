@@ -35,10 +35,10 @@
       </v-list-item>
       <v-list-item v-if="isManager" to="/payroll" router>
         <v-list-item-icon>
-          <v-icon color="white">mdi-cash</v-icon>
+          <!-- <v-icon color="white">mdi-cash</v-icon> -->
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="white--text">Payroll</v-list-item-title>
+          <!-- <v-list-item-title class="white--text">Payroll</v-list-item-title> -->
         </v-list-item-content>
       </v-list-item>
     </v-list>
